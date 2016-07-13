@@ -1,1 +1,98 @@
-/Users/jmft2/Documents/writing/preamble-light.tex
+% Jonny's lightweight preamble. 
+
+% Usage: 
+% \documentclass[a4paper,11pt]{article}
+% \input{preamble-light.tex}
+
+%%% BEGINNING OF PREAMBLE 
+
+\usepackage{amsmath,amsthm,amssymb,amsfonts,gensymb}
+
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage{parskip}
+
+\usepackage{hyperref}
+\usepackage{bm} % Nicer bolds for vectors (including bold Greek letters and bold grad symbol)
+\usepackage{verbatim} % Include files verbatim using \verbatiminput
+
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{subfigure}
+
+% commath: common maths things
+% http://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/contrib/commath/commath.pdf 
+\usepackage{commath}
+
+\usepackage[final]{pdfpages}
+\usepackage[autostyle]{csquotes}
+
+% Some shortcuts for vector calculus. 
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\grad}{\bs{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\curl}{\grad\cross}
+\newcommand{\divg}{\grad\cdot}
+\newcommand{\DDtfull}{\left(\frac{\partial}{\partial t} + \bs{u}\cdot\grad\right)}
+\newcommand{\DDt} [1] {\frac{\mathrm{D}#1}{\mathrm{D}t}}
+\newcommand{\dDDt} [1] {\displaystyle\frac{\mathrm{D}#1}{\mathrm{D}t}} 
+
+% Asterisks: \ask
+%%% See http://tex.stackexchange.com/questions/59183/normal-high-asterisk-in-equation-mode
+%%% magic code starts
+\mathcode`*=\string"8000
+\begingroup
+\catcode`*=\active
+\xdef*{\noexpand\textup{\string*}}
+\endgroup
+%%% magic code ends
+
+% Mathematical writing
+\newcommand{\theorem}{\paragraph{Theorem}}
+\newcommand \theoremp[1] {\paragraph{Theorem (#1)}}
+\newcommand{\proposition}{\paragraph{Proposition}}
+\renewcommand{\proof}{\textit{Proof. }}
+\newcommand{\example}{\paragraph{Example}}
+\newcommand{\definition}{\paragraph{Definition}}
+\newcommand{\exercise}{\paragraph{Exercise}}
+\newcommand{\exercises}{\paragraph{Exercises}}
+\newcommand{\note}{\textit{Note. }}
+\newcommand{\notes}{\textit{Notes. }}
+
+% Shortcuts for some mathematical functions
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\erf}{\mathrm{erf}}
+\newcommand{\erfc}{\mathrm{erfc}}
+
+\newcommand \naturals {\mathbb{N}}
+\newcommand \integers {\mathbb{Z}}
+\newcommand \rationals {\mathbb{Q}}
+\newcommand \reals {\mathbb{R}}
+\newcommand \complex {\mathbb{C}}
+\newcommand \Rey {\mathrm{Re}} % Reynolds number
+\renewcommand \Pr {\mathbb{P}} % probability
+\newcommand \E {\mathbb{E}} % expectation
+
+%%% Column vectors: see http://tex.stackexchange.com/questions/2705/typesetting-column-vector
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
+\usepackage{centernot}
+\newcommand{\nimplies} {\centernot\implies}
+
+\usepackage{multicol}
+%%% END OF PREAMBLE
