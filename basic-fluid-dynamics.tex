@@ -1,0 +1,130 @@
+\documentclass{article}
+\input{preamble-light.tex}
+\title{Basic Fluid Dynamics}
+\author{T. J. Crawford, J. Goedecke, P. Haas, E. Lauga, J. R. Lister, J. Munro, J. M. F. Tsang}
+
+\begin{document}
+\maketitle
+
+\section{Relevant courses}
+
+The relevant Cambridge undergraduate courses are IB Fluid Dynamics, II Fluid
+Dynamics and II Waves. 
+
+\section{Books}
+
+\section{Notes}
+
+\subsection{Lagrange, Euler and the material derivative}
+
+There are two natural ways to describe a fluid flow. In the \textit{Eulerian
+view}, one considers the evolution of fluid properties (such as velocity and
+pressure) at a fixed point, while in the \textit{Lagrangian view}, one follows
+the path of a certain fluid element and considers what happens to that element.
+
+If the velocity field is $\bs{u}(\bs{x},t)$, the \textit{pathline} of a fluid
+particle is the path traced out by that particle; it is the solution to 
+$$ \dod{\bs{x}}{t} = \bs{u}(\bs{x},t). $$
+This is useful in the Lagrangian description.
+
+However, it is usually easier to work under the Eulerian view, and to take a
+`snapshot' of fluid properties at all places at a given instant in time. A
+\textit{streamline} is a curve that is instantaneously everywhere parallel to
+the velocity field. 
+
+For a time-independent fluid flow, streamlines and pathlines coincide with each
+other, but this is not true for a time-dependent flow.
+
+Consider a quantity $F(\bs{x},t)$.  What is the rate of change
+of $F$ following the fluid particle at $(\bs{x},t)$? Since the local velocity is
+$\bs{u}(\bs{x},t)$, the particle will move by a distance
+$\delta\bs{x}=\bs{u}(x,t) \delta t$ over the time $\delta t$. Hence the change
+in $F$ is
+$$ \delta F = F(\bs{x}+\delta\bs{x},t+\delta t) - F(\bs{x},t)
+     = (\delta\bs{x}\cdot\grad)F + \delta t \dpd{F}{t} + \cdots $$
+and we define 
+$$ \DDt{F}{t} = \lim_{\delta t\rightarrow0} 
+ \frac{F(\bs{x}+\delta\bs{x},t+\delta t) - F(\bs{x},t)}{\delta t} 
+ = \dpd{F}{t} + \bs{u}\cdot\grad F. $$
+We call $\DDt{F}{t}$ the \textit{material derivative} or \textit{Lagrangian
+derivative} of $F$, and we contrast it against $\pd{F}{t}$, which refers to the rate
+of change of $F$ at a fixed position.
+
+\subsection{Governing equations}
+
+Mass conservation: 
+$$ \dpd{\rho}{t} + \divg(\rho\bs{u}) = 0 $$
+
+Momentum balance:
+$$ \dpd{}{t}(\rho\bs{u}) + \divg(\rho\bs{u}\bs{u}) = \divg\bs{\sigma} + \bs{f} $$
+or, using the mass conservation equation,
+$$ \rho\left(\dpd{\bs{u}}{t} + \bs{u}\cdot\grad\bs{u}\right) = \divg\bs{\sigma} + \bs{f} $$
+Here, $\bs{f}$ represents a \textit{body force}, such as gravity or a Coriolis
+force.  And $\sigma$ is the \textit{Cauchy stress tensor} and describes the
+effects of \textit{surface forces}. If $\dif S$ is a small surface element with
+normal $\bs{n}$, then the force on that surface element by the fluid is
+$\dif\bs{F}=\bs{\sigma}\cdot\bs{n}\dif S$, and the \textit{stress} (force per
+unit area) is $\bs{\sigma}\cdot\bs{n}$.
+
+Energy, assuming incompressibility:
+$$ \dpd{}{t} \left(\frac{1}{2}\rho|\bs{u}|^2\right) 
+   + \bs{u}\cdot\grad\left(\frac{1}{2}\rho|\bs{u}|^2\right) 
+   = \divg(\bs{u}\cdot\bs{\sigma}) + \bs{u}\cdot\bs{f} - \bs{\sigma}:\bs{e} $$
+where $\bs{e}$ is the \textit{rate of strain tensor}. The last term,
+$\bs{\sigma}:\bs{e}$, represents \textit{dissipation} and is usually written as
+$\Delta$.
+
+One gets equations for mass and momentum conservation by applying the divergence
+theorem on a small volume. A similar argument on angular momentum shows that,
+assuming that long-range forces exert no couple on individual fluid elements,
+the stress tensor must be symmetric: $\sigma_{ij}=\sigma_{ji}$.
+
+The above holds for all incompressible fluids. To close the system, we need to
+provide a relationship between $\bs{\sigma}$ and the other quantities. Such a
+relationship is a \textit{constitutive equation}, and is determined by the
+nature of the material.
+
+An incompressible Newtonian fluid satisfies $\DDt{\rho}=\divg\bs{u}=0$ and has
+the constitutive equation
+$$ \bs{\sigma} = -p \bs{I} + 2\mu\bs{e}, $$
+where $p$ is the \textit{pressure}. We do not need to provide another equation
+to specify $p$ and close the system; $p$ is determined by the condition that
+$\divg\bs{u}=0$.\footnote{In some sense, $p$ acts as a Lagrange multiplier which
+imposes the incompressibility constraint.} The strain rate tensor is given by
+$$ \bs{e} = \frac{1}{2}(\grad\bs{u}+\grad\bs{u}^T) $$
+so that $\trace\bs{e} = 0$. And the dissipation rate is given by
+$$\Delta = \bs{\sigma}:\bs{e}=2\mu\bs{e}:\bs{e}.$$
+
+The assumptions that give rise to this constitutive relation are that the the
+deviatoric stress (i.e. the anisotropic part of $\bs{\sigma}$) is
+\textit{linear} in $\grad\bs{u}$, and \textit{instantaneous} (i.e. there is no
+dependence on the history of deformation). 
+
+After all this, one gets the \textit{Navier-Stokes equations}:
+$$ \rho\DDt{\bs{u}} = -\grad p + \mu\grad^2 \bs{u} $$
+and 
+$$ \divg\bs{u} = 0. $$
+
+\subsection{Boundary conditions}
+
+\paragraph{Kinematic boundary conditions}  At a fluid-fluid interface,
+$\bs{u}\cdot\bs{n}$ is continuous (by mass conservation) and
+$\bs{u}\cross\bs{n}$ is continuous (to avoid infinite stresses). 
+
+At a rigid boundary moving with velocity $\bs{U}$, the kinematic BCs simplify to
+$$ u = U. $$
+
+For a surface given by $z=h(x,y,t)$, the kinematic BCs can be expressed as
+$$ \DDt{}(h-z) = 0 $$
+on $z=h$.
+
+\paragraph{Dynamic boundary conditions} In the absence of surface tension,
+$\bs{\sigma}\cdot\bs{n}$ is continuous. With surface tension,
+$$ [\bs{\sigma}\cdot\bs{n}] = \gamma\kappa\bs{n} - \grad_s\gamma $$
+where $\gamma$ is the \textit{coefficient of surface tension}, $\grad_s$ is the
+gradient on the surface, and $\kappa = \grad_s\cdot\bs{n}$ is the
+\textit{total curvature} of the surface.
+
+\section{Exercises}
+
+\end{document}

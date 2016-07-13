@@ -1,0 +1,116 @@
+\documentclass{article}
+\input{preamble-light.tex}
+\title{Tensors}
+\author{T. J. Crawford, J. Goedecke, P. Haas, E. Lauga, J. Munro, J. M. F. Tsang}
+
+\begin{document}
+\maketitle
+
+\section{Relevant courses}
+
+The relevant Cambridge undergraduate course is IA Vector Calculus. 
+
+\section{Books}
+
+
+\begin{itemize}
+\item K. F. Riley, M. P. Hobson and S. J. Bence \textit{Mathematical Methods for
+Physics and Engineering}. Cambridge University Press 2002.
+\item D. E. Bourne and P. C. Kendall \textit{Vector Analysis and Cartesian Tensors}.
+3rd edition, Nelson Thornes 1999
+\end{itemize}
+
+\section{Notes}
+
+\subsection{Definition and examples}
+
+Consider orthogonal right-handed bases $\{\bs{e}_i\}$ and $\{\bs{e}'_i\}$ in
+$\reals^3$ with corresponding Cartesian coordinates $\{x_i\}$ and $\{x'_i\}$.
+Then a vector $\bs{x}\in\reals^3$ can be written as
+$$ \bs{x} = x_i\bs{e}_i = x'_i\bs{e}'_i $$
+(using summation convention throughout these notes).
+
+These two bases are related by a rotation: 
+$$ \bs{e}'_i = R_{ip} \bs{e}_p \text{ and } x'_i = R_{ip} x_p $$
+where $R$ is a rotation matrix, so
+\begin{itemize}
+\item $R$ is orthogonal: $R_{ip}R_{jp} = R_{qi}R_{qj} = \delta_{ij} $, and 
+\item $\det R = 1$.
+\end{itemize}
+
+Tensors are geometrical objects which obey a generalised form of this
+transformation rule. By definition, a tensor $T$ of rank $n$ has components
+$T_{ij\dots k}$ (with $n$ indices) with respect to each basis $\{\bs{e}_i\}$
+or coordinate system $\{x_i\}$, obeying the \textit{tensor
+transformation rule}
+$$ T'_{ij\dots k} = R_{ip}R_{jq}\dots R_{kr} T_{pq\dots r}. $$
+under a change of basis.
+
+\paragraph{Examples} Here are some examples of the tensor transformation rule for different ranks:
+\begin{itemize}
+    \item Rank 0: $T' = T$. Rank 0 tensors are \textit{scalars}. 
+    \item Rank 1: $T'_i = R_{ip} T_p$. As we have seen, these are \textit{vectors}.
+    \item Rank 2: $T'_{ij} = R_{ip}R_{jq} T_{pq}$. These are \textit{matrices} which represent \textit{linear maps} or \textit{quadratic forms}.
+\end{itemize}
+
+\paragraph{Special cases} The tensors $\delta_{ij}$ and $\epsilon_{ijk}$ are
+tensors of rank 2 and 3 respectively, with the special property that their
+components are unchanged under any change of basis:
+$$ R_{ip} R_{jq} \delta_{pq} = R_{ip}R_{jp} = \delta_{ij} $$
+and 
+$$ R_{ip} R_{jq} R_{kr} \epsilon_{pqr} = (\det R)\epsilon_{ijk} = \epsilon_{ijk}. $$
+
+\paragraph{Symmetric and antisymmetric tensors} A tensor of rank $n$ obeying 
+$T_{ijp\dots q} = \pm T_{jip\dots q}$ is said to be
+\textit{symmetric/antisymmetric} in the indices $i$ and $j$. A tensor is said to
+be \textit{totally symmetric/antisymmetric} if it is symmetric/antisymmetric
+under any such swap of indices.
+
+So, $\delta_{ij}$ is totally symmetric and $\epsilon_{ijk}$ is totally
+antisymmetric.
+
+In $\reals^3$, any totally antisymmetric tensor of rank 3 takes the form
+$T_{ijk} = \lambda \epsilon_{ijk}$ for some $\lambda$. There is no totally
+antisymmetric tensor of rank $n>3$ (unless all components are zeros).
+
+\section{Exercises}
+
+\subsection{Basic properties}
+
+Show each of the following:
+\begin{itemize}
+\item If $T$ and $S$ are both tensors of rank $n$, then $(T+S)_{ij\dots k} = T_{ij\dots k} + S_{ij\dots k}$. (Hint: Use the transformation rule.)
+\item If $\alpha$ is a scalar, then $(\alpha T)_{ij\dots k} = \alpha T_{ij\dots k}$.
+\item Hence, any linear combination of rank $n$ tensors is itself a rank $n$ tensor.
+\item If $T$ and $S$ are tensors of rank $n$ and $m$ respectively, then the
+\textit{tensor product} 
+$$ (T\otimes S)_{ij\dots kpq\dots r} = T_{ij\dots k} S_{pq\dots r} $$
+is a tensor of rank $n+m$.
+\item If $\bs{u}$, $\bs{v}$, \dots, $\bs{w}$ are $n$ vectors, then $T_{ij\dots k} = u_i v_j \dots w_k $ defines a tensor of rank $n$.
+\item If $T_{ijp\dots q}$ is a tensor of rank $n$, then $S_{p\dots q} =
+\delta_{ij} T_{ijp\dots q}$ is a tensor of rank $n-2$. (Note that contracting on
+a different pair of indices in general results in a different tensor.)
+\item The trace of a matrix, $T_{ii}$, is a rank 0 tensor.
+\end{itemize}
+
+\subsection{Further exercises}
+
+Let $u_i(\bs{x})$ be a vector field and let $\sigma_{ij}(\bs{x})$ be a
+second-rank tensor field. Show that:
+\begin{itemize}
+\item $\partial u_i/\partial x_j$ transforms as a rank 2 tensor.
+\item $\divg\bs{u} = \partial u_i/\partial x_i$ is a scalar.
+\item $\partial \sigma_{ij}/partial x_j$ transforms as a vector.
+\end{itemize}
+
+Let $T$ be a tensor of rank 3, satisfying
+$$ T_{ijk} = T_{jik} \text{ and } T_{ijk} = -T_{ikj}. $$
+Show that $T_{ijk} = 0$.
+
+Let $T$ be a tensor of rank 4, satisfying 
+$$ T_{ijkl} = -T_{jikl} = -T_{ijlk} \text{ and } T_{ijij} = 0. $$
+Show that
+$$ T_{ijkl} = \epsilon_{ijp}\epsilon_{klq} S_{pq} $$
+where $ S_{pq} = -T_{rqrp} $.
+
+\end{document}
