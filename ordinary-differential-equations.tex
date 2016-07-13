@@ -13,11 +13,17 @@ independent variable $x$, a dependent variable $y(x)$, and derivatives $y'(x)$,
 $y''(x)$, \dots. A differential equation is said to be $n$th-order if
 $y^{(n)}(x)$ is the highest-order derivative that appears.
 
+\section{Linear equations}
+
 An $n$th-order ODE is said to be \textit{linear} if it takes the form
-$$ a_0(x) y + a_1(x) y' + a_2(x) y'' + \dots + a_n y^{(n)} = f(x); $$ 
+\begin{equation} \label{eqn:linear-ode}
+    a_0(x) y + a_1(x) y' + a_2(x) y'' + \dots + a_n y^{(n)} = f(x); 
+\end{equation}
 that is, if $y$ and its derivatives do not appear in any nonlinear function.
 The ODE is said to be \textit{homogeneous} if $f(x) = 0$, and it is said to have
 \textit{constant coefficients} if each of the $a_i$ is constant. 
+
+\subsection{Homogeneous equations}
 
 An $n$th-order linear homogeneous equation has $n$ linearly independent
 solutions $y_i$, and any solution can be written in the form
@@ -26,9 +32,43 @@ for some constants $C_i$. Initial and boundary conditions impose conditions on
 the $C_i$. Except in degenerate cases, a solution is uniquely determined when
 $n$ such conditions are imposed. 
 
-If an $n$th-order linear homogeneous equation has constant coefficients, then
-the solutions $y_i$ take the form $y_i = \exp(\lambda_i x)$, where the
-$\lambda_i$ are the solutions to the polynomial equation
+\subsection{Exponential solutions}
+
+If the $a_i$ in \ref{eqn:linear-ode} are constants and $f = 0$, then the
+linearly independent solutions $y_i$ take the form $y_i = \exp(\lambda_i x)$,
+where the $\lambda_i$ are the solutions to the \textit{characteristic
+polynomial} equation
 $$ a_0 + a_1 \lambda + a_2 \lambda^2 + \dots + a_n \lambda^n = 0. $$
+
+\paragraph{Repeated roots} If $\lambda$ is a root of the polynomial with multiplicity
+$m>1$, then the corresponding solutions take the form $x^k \exp(\lambda x)$ for
+$k=0,\dots,m-1$.
+
+Example: Consider the ODE
+$$ y''' + y'' - 5y + 3 = 0. $$
+This is a homogeneous equation with constant coefficients. The characteristic
+polynomial is 
+$$ \lambda^3 + \lambda^2 - 5\lambda + 3 = 0 $$
+which can be factorised as 
+$$ (\lambda-1)^2 (\lambda+3) = 0 $$
+which has roots $-3$ and $+1$; the root $\lambda=1$ has multiplicty 2. The three
+linearly independent solutions to the differential equation are therefore
+$$ y_1 = \exp(-3x) \text{ } y_2 = \exp(x) \text{ } y_3 = x\exp(x). $$
+
+\subsection{Particular solutions}
+
+\subsection{Series solutions}
+
+If the $a_i(x)$ are polynomials in $x$, then a series solution can be sought in
+the neighbourhood of a point. One makes the ansatz 
+$$ y = \sum_{k=0}^\infty c_k x^k $$
+and substitutes into 
+
+\section{Other methods}
+
+An equation of the form $\od{y}{x} = f(x)g(y)$ can be integrating by rearranging to 
+$$ \frac{\dif y}{g(y)} = f(x)\dif x, $$
+integrating both sides, and rearranging to get $y$ as a function of $x$.
+(Sometimes, it may not be possible to do that analytically.)
 
 \end{document}
