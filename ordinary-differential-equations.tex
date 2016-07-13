@@ -1,0 +1,34 @@
+\documentclass{article}
+\input{preamble-light.tex}
+\title{Ordinary differential equations}
+\author{T. J. Crawford, J. Goedecke, P. Haas, E. Lauga, J. Munro, J. M. F. Tsang}
+
+\begin{document}
+\maketitle
+
+The relevant Cambridge undergraduate course is IA Differential Equations.
+
+An ordinary differential equation expresses a relationship between an
+independent variable $x$, a dependent variable $y(x)$, and derivatives $y'(x)$,
+$y''(x)$, \dots. A differential equation is said to be $n$th-order if
+$y^{(n)}(x)$ is the highest-order derivative that appears.
+
+An $n$th-order ODE is said to be \textit{linear} if it takes the form
+$$ a_0(x) y + a_1(x) y' + a_2(x) y'' + \dots + a_n y^{(n)} = f(x); $$ 
+that is, if $y$ and its derivatives do not appear in any nonlinear function.
+The ODE is said to be \textit{homogeneous} if $f(x) = 0$, and it is said to have
+\textit{constant coefficients} if each of the $a_i$ is constant. 
+
+An $n$th-order linear homogeneous equation has $n$ linearly independent
+solutions $y_i$, and any solution can be written in the form
+$$ y = \sum_{i=1}^n C_i y_n $$
+for some constants $C_i$. Initial and boundary conditions impose conditions on
+the $C_i$. Except in degenerate cases, a solution is uniquely determined when
+$n$ such conditions are imposed. 
+
+If an $n$th-order linear homogeneous equation has constant coefficients, then
+the solutions $y_i$ take the form $y_i = \exp(\lambda_i x)$, where the
+$\lambda_i$ are the solutions to the polynomial equation
+$$ a_0 + a_1 \lambda + a_2 \lambda^2 + \dots + a_n \lambda^n = 0. $$
+
+\end{document}
