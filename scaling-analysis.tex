@@ -1,0 +1,168 @@
+\documentclass{article}
+\input{preamble-light.tex}
+\title{Scaling analysis}
+\author{T. J. Crawford, J. Goedecke, P. Haas, E. Lauga, J. Munro, J. M. F. Tsang}
+
+\begin{document}
+\maketitle
+
+\section{Relevant courses}
+
+The relevant Cambridge undergraduate courses are IB Fluid Dynamics, II Fluid
+Dynamics and II Mathematical Biology.
+
+\section{Books}
+
+
+\section{Notes}
+
+\subsection{The heat equation}
+
+Consider the heat equation
+$$ \dpd{u}{t} = \alpha\grad^2 u  $$
+where $\alpha$ is the thermal diffusivity (related to the thermal conductivity
+of a material $k$ by $\alpha = k/(c_p \rho)$. 
+
+Specifically, consider this equation on the one-dimensional domain
+$x\in[0,L]$ for $t>0$ (so that $\grad^2 = \od[2]{}{x}$). The initial and boundary conditions are 
+$$ u(x,0) = f(x) \text{ for some given $f$} $$
+and
+$$ u(0,t) = u(L,t) \text{ for all t.} $$
+
+What is the timescale for heat to decay? 
+
+There are two approaches for analysing this problem.
+
+\paragraph{Approach 1: Exact solution} We solve the equation exactly using
+separation of variables. Looking for $u(x,t)$ as a superposition of solutions of
+the form $T(t)X(x)$, we find that the solution takes the form 
+$$ u(x,t) = \sum_{n=1}^\infty D_n \sin\left(\frac{n\pi x}{L}\right)
+\exp\left(\frac{-n^2 \pi^2 \alpha t}{L^2}\right). $$
+Therefore, the decay happens over a timescale $T \propto L^2/\alpha$.
+
+\paragraph{Approach 2: Dimensional/scaling analysis} Let us write $u(x,t) = U \hat
+u(x,t) $, where $U$ is a `typical' temperature. Also, write $t=T\hat{t}$ and
+$x=L\hat{x}$. We are interested in finding the timescale $T$. The hatted
+quantities are all nondimensional.
+
+Substituting these into the heat equation, and dropping hats, one gets
+$$ \frac{U}{T} u_t = \frac{\alpha U}{L^2} u_{xx}. $$
+Since the dimensions must match up, 
+$$ \frac{U}{T} \propto \frac{\alpha U}{L^2} $$
+and so $T \propto L^2/\alpha$ as before.
+
+\subsection{The Reynolds number}
+
+Consider the Navier-Stokes equations
+$$ \rho\DDt{\bs{u}} = -\grad p + \mu \grad^2 \bs{u} \text{ and } \divg\bs{u}=0 $$
+supposing that there are no body forces.
+
+Let $u = U\hat{u}$, $x = L\hat{x}$, $t = T\hat{t}$ and $p = P\hat{p}$, where $T$
+is the \textit{advective} timescale, $T = L/U$ (so that the $\pd{\bs{u}}{t}$ and
+$\bs{u}\cdot\grad\bs{u}$ terms are scaled equally). Putting these into the
+Navier-Stokes equations, and dropping hats, we get
+$$ \frac{\rho U^2}{L} \DDt{\bs{u}} = \frac{-P}{L} \grad P + \frac{\mu U}{L^2} \grad^2 \bs{u}. $$
+The Reynolds number is defined as the ratio of the inertia term to the viscous term:
+\begin{equation}
+ \Rey = \frac{\text{inertia}}{\text{viscosity}}  
+      = \frac{\rho U^2 / L}{\mu U / L^2} 
+      = \frac{\rho L U}{\mu} 
+      = \frac{LU}{\nu}.
+\end{equation}
+
+We can proceed in two different ways:
+\begin{itemize}
+\item Dividing by the viscous scale gives us
+$$ \Rey\DDt{\bs{u}} = \frac{-PL}{\mu U} \grad P + \grad^2\bs{u}. $$
+For \textit{small} $\Rey$, we choose the viscous pressure scale $P\sim\frac{\mu U}{L}$, 
+and we get the Stokes equations 
+$$ \grad p = \grad^2 \bs{u} $$
+which hold at low Reynolds numbers (i.e. for viscous flows).
+
+\item Alternatively, dividing by the inertia scale gives us
+$$ \DDt{\bs{u}} = \frac{-P}{\rho U^2} \grad P + \frac{1}{\Rey} \grad^2\bs{u}. $$
+For \textit{large} $\Rey$, we choose the inviscid pressure scale $P\sim\rho U^2$,
+to get the inviscid Euler equations 
+$$ \DDt{\bs{u}} = -\grad P. $$
+\end{itemize}
+
+\section{Exercises}
+
+\subsection{Exercise 1} 
+
+A simple model of two competing species eating the same food takes the form
+\begin{align*}
+ \dod{N_1}{t} &= r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12} \frac{N_2}{K_2} \right), \\
+ \dod{N_2}{t} &= r_2 N_2 \left( 1 - \frac{N_2}{K_2} - b_{21} \frac{N_1}{K_1} \right), \\
+\end{align*}
+where $N_1$ and $N_2$ are the population sizes. Rescale the equations to
+simplify them, and show that the solutions depend only on $\rho = r_2/r_1$,
+$b_{12}$ and $b_{21}$. 
+
+\subsection{Exercise 2}
+
+%A bistable system with diffusion is given by
+%$$ \dpd{u}{t} = \dpd[2]{u}{x} - u(u-r)(u-1) $$
+%where $0<r<1$. Seek a travelling wave solution by setting $\xi = x-ct$ and
+%$u(x,t)=f(\xi)$, and find the differential equation satisfied by $f$. 
+
+The concentration of a chemical $C(x,t)$ satisfies the nonlinear diffusion
+equation
+$$ \dpd{C}{t} = \dpd{}{x}\left(D(C)\dpd{C}{x}\right) $$
+and the condition $\int_{-\infty}^\infty C(x,t) \dif x = M$. The diffusivity is
+given by $D(C) = kC^p$, and $M$, $k$ and $p$ are positive constants. 
+
+Use dimensional analysis to find a suitable space-like scale $\xi$ and a
+space-independent $\eta$ for the similarity solution of the form 
+$$ C(x,t) = \eta F(\xi). $$
+Use this form to seek the solution initially localised to the origin, and show
+that $F$ is of the form
+$$ F(\xi) = \begin{cases}
+ \left( A - \frac{p}{2(2+p)} \xi^2 \right)^{1/p} & \text{for $|\xi| < \xi_0$} \\
+ 0 & \text{otherwise}
+\end{cases} $$
+for some $A$ and $\xi_0$. For the case when $p=2$, find $A$ and $\xi_0$. 
+
+\subsection{Exercise 3: Flow in a 2D thin layer}
+
+Consider a flow in a 2D domain where $x\sim L$ and $y\sim\delta L$, where
+$\delta\ll1$ so the domain is thin. How do $\pd{}{x}$ and $\pd{}{y}$ scale?
+
+If $u\sim U$, explain why $v\sim\delta U$, and explain why the advective timescale $T$ is proportional to $L/U$. 
+
+Rescale the Navier-Stokes equations, taking an advective timescale and choosing
+the pressure scale $P$ so that it always balances the $x$-momentum equation.
+Show that three regimes are possible, depending on how large $\Rey$ is compared
+to $\delta$:
+\begin{itemize}
+    \item If $\delta^2\Rey \ll 1$ then $P\sim\frac{\mu U}{\delta^2L}$, and
+    $$ 0 = -\dpd{p}{x} + \dpd[2]{u}{y} \text{ and } 0 = -\dpd{p}{y}. $$
+    This is the \textit{lubrication regime}. 
+    \item If $\delta^2\Rey\sim1$ then again $P\sim\frac{\mu U}{\delta^2L}$, but
+    now 
+    $$ \DDt{u} = -\dpd{p}{x} + \dpd[2]{u}{y} \text{ and } 0 = -\dpd{p}{y}. $$
+    These are the \textit{unsteady boundary layer equations}. They represent the
+    flow of a low-viscosity fluid in a thin layer near a no-slip boundary; the
+    thickness of the boundary layer is controlled by the viscosity of the fluid.
+    \item For $\delta^2\Rey\gg1$, one has $P\sim\rho U^2$, and 
+    $$ \DDt{u} = -\dpd{p}{x} \text{ and } 0 = -\dpd{p}{y} $$
+    This is the \textit{shallow water regime}. This regime can be used to model
+    the flow of low-viscosity fluids in chutes, rivers or even oceans (provided
+    that horizontal lengths are far greater than the depth).
+\end{itemize}
+
+\subsection{Exercise 4: Decay of vorticity}
+
+Writing $\bs{\omega} = \curl\bs{u}$ for the vorticity, and using the identities
+$$ (\bs{u}\cdot\grad)\bs{u} = (\curl\bs{u})\cross\bs{u} + \grad\left(\frac{1}{2}|\bs{u}|^2\right) $$
+and
+$$ \grad^2\bs{u} = \grad(\divg\bs{u}) - \curl(\curl\bs{u}), $$
+show that
+$$ \dpd{\bs{\omega}}{t} + (\bs{u}\cdot\grad)\bs{\omega} - (\bs{\omega}\cdot\grad)\bs{u} = \nu\grad^2\bs{\omega} $$
+provided that body forces are conservative. This is the \textit{vorticity equation}.
+
+Why does the $(\bs{\omega}\cdot\grad)\bs{u}$ term vanish in the 2D case? 
+
+Show that vorticity decays over a lengthscale $L\propto\frac{\nu}{U}$.
+
+\end{document}
